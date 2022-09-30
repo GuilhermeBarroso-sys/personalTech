@@ -1,0 +1,23 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #272A2F;
+}
+h1,h2,h3,h4,h5 {
+  font-weight: bolder;
+  font-size: 1.875rem;
+  color: #FFFFFF
+}
+
+
+.test {
+  color: #59f7ed80;
+}
+.title {
+  font-size: 1.5rem;
+  color: #DFDFDE
+}

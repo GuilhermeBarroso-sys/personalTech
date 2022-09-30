@@ -1,0 +1,36 @@
+table {
+  width: 100%;
+  border-spacing: 0.5rem;
+
+  th {
+    font-weight: 600;
+    line-height: 1.5rem;
+    padding: 1rem 2rem;
+    color: #FFFFFF;
+    text-align: left;
+  }
+  td {
+
+    padding: 1rem 2rem;
+    background: #272A2F;
+    border:0;
+    border-bottom: #313131 solid 0.5rem;
+    border-radius: 0.25rem; 
+    color: #FFFFFF;
+    &:first-child {
+      width:40%;
+      margin-bottom: 3rem;
+    }
+  }
+
+  
+}
+.income {
+  color: #59f7ed;
+}
+.outcome{
+  color: #FF6384
+}
+.tableBody{
+
+}
