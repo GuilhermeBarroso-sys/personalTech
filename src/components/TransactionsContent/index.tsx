@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { ITransactions, ITransactionsInfo, TransactionContext } from "../../context/transactionContext";
 import { Header } from "../Header";
+import { Modal } from "../Modal";
 import { TransactionsBox } from "./TransactionsBox";
 import { TransactionsSearch } from "./TransactionsSearch";
 import { TransactionsTable } from "./TransactionsTable";
@@ -11,6 +12,10 @@ export function TransactionsContent() {
 	const [persistentTransactions, setPersistentTransactions] = useState<ITransactions[]>([]);
 	const [totalIncome, setTotalIncome] = useState(0);
 	const [totalOutcome, setTotalOutcome] = useState(0);
+	const [modalIsOpen, setModalIsOpen] = useState(false);
+	function toggleModal() {
+		setModalIsOpen(!modalIsOpen);
+	}
 	const [total, setTotal] = useState(0);
 	function getTransactionsInfo(transactions : ITransactions[]) : ITransactionsInfo {
 		const tmpTotalIncome : Array<number> = [];
@@ -50,8 +55,13 @@ export function TransactionsContent() {
 	return (
 		<section className="min-h-screen bg-[#313131] xl:w-4/5 w-full  rounded-3xl ">
 			<Header />
+			<Modal toggleModal={toggleModal} isOpen={modalIsOpen}/>
 			<div className="xl:ml-16 mt-20 ">
-				<h1 className="xl:mb-8  xl:text-left text-center">Transactions</h1>
+				<div className="w-4/5 flex flex-row items-start justify-between ">
+					<h1 className="xl:mb-8  xl:text-left text-center">Transactions</h1>
+					<div className=""> <button onClick={toggleModal}>Create Transaction</button> </div>
+				</div>
+				
 				<div className="flex flex-col xl:flex-row items-center  ">
 					<div className=" rounded-lg xl:w-5/6 p-5 w-5/6  ">
 						<div className="flex xl:flex-row flex-col justify-between ">
