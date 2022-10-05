@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-import { Header } from "../../Header";
 import { Spinner } from "../../Spinner";
 type CurrencySymbol = "R$" | "$" | "€"
 interface ITransactionsBox {
@@ -8,14 +6,10 @@ interface ITransactionsBox {
   value: number;
   currency: CurrencySymbol
   bgColor?: string 
-
 }
 export function TransactionsBox({title, svgColor, value, currency, bgColor} : ITransactionsBox) {
-	
 	return (
-		
 		<div className={`${ bgColor ? bgColor :"bg-[#272A2F]"} w-full sm:2/5 lg:w-2/4  xl:w-1/4 py-8 rounded-lg xl:mx-0 mx-auto xl:my-0 my-3`}>
-		
 			<div className="flex justify-between items-center px-5 title mb-4 ">
 				<h3 className="title">{title}</h3>
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" color={svgColor} viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 rounded-lg ">

@@ -17,7 +17,6 @@ export function TransactionsSearch({transactions, searchCallback} : ITransaction
 	}, [transactionRecords]);
 	return (
 		<>
-  
 			<input
 				type="search"
 				ref={inputRef}
@@ -26,9 +25,7 @@ export function TransactionsSearch({transactions, searchCallback} : ITransaction
 				placeholder="Type some transaction"
 			/>
 			<button className="border-solid border-green-700 border-4 w-auto px-12 text-green-500 text-lg" onClick={async () => {
-			
-				setTransactionsRecords(transactions.filter((transaction) => transaction.name == inputRef.current?.value));
-				
+				setTransactionsRecords(transactions.filter((transaction) => transaction.name.toLowerCase() == inputRef.current?.value?.toLowerCase()));
 			}}>
 				<div className="flex justify-between ">
   

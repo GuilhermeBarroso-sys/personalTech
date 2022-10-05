@@ -2,10 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { ITransactions, ITransactionsInfo, TransactionContext } from "../../context/transactionContext";
 import { Header } from "../Header";
 import { Modal } from "../Modal";
+import { CreateTransaction } from "./CreateTransaction";
 import { TransactionsBox } from "./TransactionsBox";
 import { TransactionsSearch } from "./TransactionsSearch";
 import { TransactionsTable } from "./TransactionsTable";
-
+import {useAutoAnimate} from "@formkit/auto-animate/react";
 export function TransactionsContent() {
 
 	const {transactions,updateTransactions} = useContext(TransactionContext);
@@ -13,10 +14,16 @@ export function TransactionsContent() {
 	const [totalIncome, setTotalIncome] = useState(0);
 	const [totalOutcome, setTotalOutcome] = useState(0);
 	const [modalIsOpen, setModalIsOpen] = useState(false);
-	function toggleModal() {
-		setModalIsOpen(!modalIsOpen);
-	}
 	const [total, setTotal] = useState(0);
+	const [parent] = useAutoAnimate();
+
+	function openModal() {
+		setModalIsOpen(true);
+	}
+	function closeModal() {
+		setModalIsOpen(false);
+	}
+  
 	function getTransactionsInfo(transactions : ITransactions[]) : ITransactionsInfo {
 		const tmpTotalIncome : Array<number> = [];
 		const tmpTotalOutcome : Array<number> = [];
@@ -55,11 +62,19 @@ export function TransactionsContent() {
 	return (
 		<section className="min-h-screen bg-[#313131] xl:w-4/5 w-full  rounded-3xl ">
 			<Header />
-			<Modal toggleModal={toggleModal} isOpen={modalIsOpen}/>
+			<Modal closeModal={closeModal} isOpen={modalIsOpen} >
+				<div className="w-full  flex items-center justify-center">
+					<CreateTransaction />
+				</div>
+			</Modal>
 			<div className="xl:ml-16 mt-20 ">
-				<div className="w-4/5 flex flex-row items-start justify-between ">
+				<div className="xl:w-4/5 flex xl:flex-row flex-col xl:justify-between xl:items-start items-center justify-center w-full ">
 					<h1 className="xl:mb-8  xl:text-left text-center">Transactions</h1>
-					<div className=""> <button onClick={toggleModal}>Create Transaction</button> </div>
+					<div className="">  
+						<svg xmlns="http://www.w3.org/2000/svg" onClick={openModal} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-green-600 cursor-pointer ">
+							<path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+						</svg>
+					</div>
 				</div>
 				
 				<div className="flex flex-col xl:flex-row items-center  ">

@@ -21,7 +21,7 @@ export interface ITransactions {
 
 interface ITransactionContext {
   transactions: ITransactions[]
-  updateTransactions: (transactions: ITransactions[]) => void;
+  updateTransactions: (transactions?: ITransactions[]) => void;
 }
 type ITransactionProviderProps = {
   children : ReactNode
@@ -62,7 +62,51 @@ export function TransactionProvider({children} : ITransactionProviderProps) {
 		},
     
 	]);
-	const updateTransactions = (transactions : ITransactions[]) => setTransactions(transactions);
+	async function getTransactions() : Promise<ITransactions[]> {
+		return new Promise(resolve => resolve(
+			[
+				{
+					id: "1",
+					name: "Salary",
+					value: 3500.00,
+					currency: "$",
+					category: "Salary",
+					type: "income",
+					weekDay: "Thursday",
+					date: "01/13/2022"
+				},
+				{
+					id: "2",
+					name: "Servers",
+					value: 700.00,
+					currency: "$",
+					category: "Projects",
+					type: "outcome",
+					weekDay: "Wednesday",
+					date: "01/12/2022"
+				},
+				{
+					id: "3",
+					name: "Macbook",
+					value: 1200.00,
+					currency: "$",
+					category: "Electronics",
+					type: "outcome",
+					weekDay: "Monday",
+					date: "01/10/2022"
+				},
+        
+			]
+		));
+	}
+	const updateTransactions = async (transactions? : ITransactions[]) => {
+		if(transactions) {
+			setTransactions(transactions);
+		} else{
+			setTransactions(await getTransactions());
+		}
+	};
+
 	const useTransaction =  useMemo(() => ({
 		transactions,
 		updateTransactions
